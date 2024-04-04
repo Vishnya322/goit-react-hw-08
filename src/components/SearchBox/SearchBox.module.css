@@ -1,4 +1,4 @@
-.searchForm {
+/* .searchForm {
   width: 350px;
   height: 35px;
   border: 2px solid purple;
@@ -9,4 +9,14 @@
   font-weight: 500;
   font-size: 1.3em;
   margin-bottom: 10px;
+} */
+.label {
+  margin-top: 20px;
+}
+
+.input {
+  width: 320px;
+  margin-bottom: 30px;
+  border: 1px solid black;
+  height: 20px;
 }
