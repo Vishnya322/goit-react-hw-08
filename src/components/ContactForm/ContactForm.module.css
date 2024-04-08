@@ -16,6 +16,7 @@
   border: 1px solid purple;
   padding: 20px;
   font-size: 1.3em;
+  color: rgb(98, 4, 132);
   font-weight: 500;
   font-family: inherit;
   background-color: #f5f2f2;
@@ -24,11 +25,11 @@
   height: 30px;
   margin-bottom: 10px;
 }
-button:hover {
-  border-color: #646cff;
+.formButton:hover {
+  border-color: #eab9e9;
 }
-button:focus,
-button:focus-visible {
+.formButton:focus,
+.formButton:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 .box {

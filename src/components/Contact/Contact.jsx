@@ -1,32 +1,32 @@
-import css from './Contact.module.css';
-import { ImUser } from 'react-icons/im';
-import { ImPhone } from 'react-icons/im';
+import { FaPhoneAlt } from 'react-icons/fa';
+import { IoPerson } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contactsOps';
+import css from './Contact.module.css';
+import { deleteContact } from '../../redux/contacts/operations';
 
-const Contact = ({ data: { id, name, number } }) => {
+export default function Contact({ number, name, id }) {
   const dispatch = useDispatch();
-  const handleDelete = () => {
-    // Відправляємо екшен для видалення контакту з відповідним id
-    dispatch(deleteContact(id));
-  };
+
   return (
     <div className={css.cardContainer}>
       <div className={css.cardBox}>
         <div className={css.iconBox}>
-          <ImUser className={css.icon} />
+          <IoPerson className={css.icon} />
           <p className={css.nameClient}>{name}</p>
         </div>
         <div className={css.iconBox}>
-          <ImPhone className={css.icon} />
+          <FaPhoneAlt className={css.icon} />
           <p className={css.namberClient}>{number}</p>
         </div>
       </div>
-      <button className={css.btn} onClick={handleDelete}>
+      <button
+        className={css.btn}
+        onClick={() => {
+          dispatch(deleteContact(id));
+        }}
+      >
         Delete
       </button>
     </div>
   );
-};
-
-export default Contact;
+}

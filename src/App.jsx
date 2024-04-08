@@ -7,14 +7,12 @@ import { selectIsRefreshing } from './redux/auth/selectors';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRoute';
 
-const HomePage = lazy(() => import('./pages/Home/Home.jsx/Home'));
-const RegisterPage = lazy(() =>
-  import('./pages/Register/Register.jsx/Register')
+const HomePage = lazy(() => import('./pages/Home/Home'));
+const RegistrationPage = lazy(() =>
+  import('./pages/Registration/Registration')
 );
-const LoginPage = lazy(() => import('./pages/Login/Login.jsx/Login'));
-const ContactsPage = lazy(() =>
-  import('./pages/Contacts/Contacts.jsx/Contacts')
-);
+const LoginPage = lazy(() => import('./pages/Login/Login'));
+const ContactsPage = lazy(() => import('./pages/Contacts/Contacts'));
 
 export default function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -35,7 +33,7 @@ export default function App() {
             path="/register"
             element={
               <RestrictedRoute
-                component={<RegisterPage />}
+                component={<RegistrationPage />}
                 redirectTo="/contacts"
               />
             }

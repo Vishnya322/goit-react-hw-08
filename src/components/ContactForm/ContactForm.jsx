@@ -1,93 +1,76 @@
-import css from './ContactForm.module.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import { useId } from 'react';
-import { addContact } from '../../redux/contactsOps';
 import { useDispatch } from 'react-redux';
+import css from './ContactForm.module.css';
+import { addContact } from '../../redux/contacts/operations';
+import * as Yup from 'yup';
 
-const ContactSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(3, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  number: Yup.string()
-    .min(3, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-});
-const initialValues = {
-  name: '',
-  number: '',
-};
-
-const ContactForm = () => {
-  const dispatch = useDispatch();
-  // const contacts = useSelector(state => state.contacts.items);
+export default function ContactForm() {
   const nameFieldId = useId();
   const numberFieldId = useId();
+  const dispatch = useDispatch();
 
+  const userSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, 'Too short!')
+      .max(50, 'Too long!')
+      .required('Required'),
+    number: Yup.string()
+      .min(3, 'Too short!')
+      .max(50, 'Too long!')
+      .required('Required'),
+  });
+
+  const handleAdd = (values, actions) => {
+    const { name, number } = values;
+    dispatch(addContact({ name, number }));
+    actions.resetForm();
+  };
   return (
     <Formik
-      initialValues={initialValues}
-      validationSchema={ContactSchema}
-      onSubmit={async (values, { setSubmitting, resetForm }) => {
-        try {
-          setSubmitting(true);
-
-          dispatch(
-            addContact({
-              name: values.name,
-              number: values.number,
-            })
-          );
-
-          resetForm();
-        } catch (error) {
-          console.error('Error submitting form:', error);
-        } finally {
-          setSubmitting(false);
-        }
-      }}
+      initialValues={{ name: '', number: '' }}
+      onSubmit={handleAdd}
+      validationSchema={userSchema}
     >
-      {({ isSubmitting }) => (
-        <Form className={css.contactForm}>
-          <div className={css.box}>
-            <label className={css.label} htmlFor={nameFieldId}>
-              Name
-            </label>
-            <Field
-              className={css.field}
-              type="text"
-              name="name"
-              id={nameFieldId}
-              autoComplete="off"
-            />
-            <ErrorMessage className={css.error} name="name" as="span" />
-          </div>
-          <div className={css.box}>
-            <label className={css.label} htmlFor={numberFieldId}>
-              Number
-            </label>
-            <Field
-              className={css.field}
-              type="text"
-              name="number"
-              id={numberFieldId}
-              autoComplete="off"
-            />
-            <ErrorMessage className={css.error} name="number" as="span" />
-          </div>
-
-          <button
-            className={css.formButton}
-            type="submit"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Adding contact...' : 'Add contact'}
-          </button>
-        </Form>
-      )}
+      <Form className={css.contactForm}>
+        <div className={css.box}>
+          <label className={css.label} htmlFor={nameFieldId}>
+            Name
+          </label>
+          <Field
+            className={css.field}
+            type="text"
+            name="name"
+            id={nameFieldId}
+          />
+          <ErrorMessage
+            className={css.error}
+            name="name"
+            component="span"
+            style={{ color: 'red' }}
+          />
+        </div>
+        <div className={css.box}>
+          <label className={css.label} htmlFor={numberFieldId}>
+            Number
+          </label>
+          <Field
+            className={css.field}
+            type="text"
+            name="number"
+            id={numberFieldId}
+          />
+          <ErrorMessage
+            className={css.error}
+            name="number"
+            component="span"
+            style={{ color: 'red' }}
+          />
+        </div>
+        <button type="submit" className={css.formButton}>
+          Add contact
+        </button>
+      </Form>
     </Formik>
   );
-};
-export default ContactForm;
+}

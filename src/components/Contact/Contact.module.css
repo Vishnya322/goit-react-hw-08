@@ -18,16 +18,19 @@
 .nameClient {
   line-height: 0.6;
   font-weight: 500;
+  color: rgb(68, 8, 166);
   font-size: 1.3em;
   margin-bottom: 0px;
 }
 .namberClient {
   font-size: 1.3em;
   line-height: 0.6;
+  color: rgb(106, 8, 176);
   font-weight: 500;
 }
 .btn {
   font-size: 1.3em;
+  color: rgb(66, 4, 89);
   line-height: 0.6;
   font-weight: 500;
   padding: 15px;
@@ -43,4 +46,5 @@
   width: 2.5em;
   height: 2.5em;
   padding-top: 15px;
+  color: rgb(98, 4, 132);
 }

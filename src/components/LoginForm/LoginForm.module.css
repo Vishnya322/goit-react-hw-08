@@ -17,9 +17,9 @@
   cursor: pointer;
   font-size: 18px;
   width: 100px;
-  border: 1px solid black;
+  border: 1px solid rgb(90, 19, 88);
   border-radius: 4px;
   display: block;
-  background-color: aliceblue;
+  background-color: rgb(235, 186, 225);
   margin-top: 10px;
 }

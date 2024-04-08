@@ -8,3 +8,9 @@
   padding-left: 0%;
   width: auto;
 }
+.item {
+  display: flex;
+
+  padding: 10px;
+  flex-direction: column;
+}
